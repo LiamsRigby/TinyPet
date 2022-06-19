@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <title>TinyPet</title>
 
-    <meta name="google-signin-client_id" content="830441257272-lukmtap2l817d9a76vdjdp65p15faa4g.apps.googleusercontent.com">    
+    <meta name="google-signin-client_id" content="430963393571-7itq6p4onlaonvvcu4brhf3m5apksiaq.apps.googleusercontent.com">    
     <meta name="google-signin-plugin_name" content="stop bugging me">
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
 
@@ -30,7 +31,7 @@
             name: "",
         };
         var currentURL = "/";
-        var hostApi = "https://petcloudproject.appspot.com/_ah/api/myApi/v1";
+        var hostApi = "https://petitions-352013.ew.r.appspot.com/_ah/api/myApi/v1";
         var notification = {
             message: "",
             close: true,
@@ -309,9 +310,7 @@
 
                         API_MyPetitionCreated.list = result.items;
                         scrollToTop();
-                        if (result.items.length == 0) {
-                            startNotification("Aucune pétition créée pour le moment");
-                        } else {
+
                             var last = result.items[result.items.length - 1].key.name;
                             var previousNext = API_MyPetitionCreated.next[API_MyPetitionCreated.next.length - 1];
                             if (previousNext == undefined) {
@@ -325,7 +324,7 @@
                                 API_MyPetitionCreated.previous.pop();
                                 API_MyPetitionCreated.next.pop();
                             }
-                        }
+                        
                     })
             }
         }
@@ -345,9 +344,6 @@
 
                         API_MyPetitionSigned.list = result.items;
                         scrollToTop();
-                        if (result.items.length == 0) {
-                            startNotification("Aucune pétition signé pour le moment");
-                        } else {
                             var last = result.items[result.items.length - 1].key.name;
                             var previousNext = API_MyPetitionSigned.next[API_MyPetitionSigned.next.length - 1];
                             if (previousNext == undefined) {
@@ -361,9 +357,6 @@
                                 API_MyPetitionSigned.previous.pop();
                                 API_MyPetitionSigned.next.pop();
                             }
-                        }
-                    }).catch(function (e) {
-                        startNotification("Aucune pétition signé pour le moment");
                     })
             }
         }
@@ -569,24 +562,24 @@
                                             [
                                                 m("div", { "class": "tile is-parent" },
                                                     [
-                                                        m("img", { "class": "img40", "src": API_infoPetition.item.img_url }),
+                                                        //m("img", { "class": "img40", "src": API_infoPetition.item.img_url }),
                                                         m("div", { "class": "tile is-child box div_adapt" },
                                                             [
-                                                                m("p", { "class": "title" }, "Titre : "+API_infoPetition.item.titre),                                                                
+                                                                m("p", { "class": "title" }, API_infoPetition.item.titre),                                                                
                                                                 m("p", { "class": "text_ligne" }, API_infoPetition.item.description),
                                                                 m("br"),                                                                
                                                                 m("p", { "class": "title" },
-                                                                    "Informations complémentaires"
+                                                                    "Informations de la pétition"
                                                                 ),
-                                                                m("span", { "class": "w-500" }, "Auteur : "),
+                                                                m("span", { "class": "w-500" }, "L'auteur est "),
                                                                 m("span", API_infoPetition.item.proprietaireName), m("br"),
-                                                                m("span", { "class": "w-500" }, "Thème : "),
+                                                                m("span", { "class": "w-500" }, "Cette pétition concerne "),
                                                                 m("span", API_infoPetition.item.theme), m("br"),
-                                                                m("span", { "class": "w-500" }, "Date de création : "),
+                                                                m("span", { "class": "w-500" }, "Elle a été créée le "),
                                                                 m("span", API_infoPetition.item.date), m("br"),
-                                                                m("span", { "class": "w-500" }, "Date de dernière modification : "),
+                                                                m("span", { "class": "w-500" }, "La dernière modification a été faite le "),
                                                                 m("span", API_infoPetition.item.update_at), m("br"),
-                                                                m("ul", { "class": "truncates" },
+                                                                /*m("ul", { "class": "truncates" },
                                                                     [
                                                                         m("span", { "class": "w-500" },
                                                                             " Tag : "
@@ -596,7 +589,7 @@
                                                                             )
                                                                         })
                                                                     ]
-                                                                )
+                                                                )*/
                                                             ]
                                                         )
                                                     ]
@@ -711,17 +704,14 @@
                                             m("div", { "class": "field " },
                                                 [
                                                     m("label", { "class": "label" },
-                                                        "Titre"
+                                                        "Titre*"
                                                     ),
-                                                    m("div", { "class": "control" },
+                                                    m("div", { "class": "form-group" },
                                                         m("input", {
-                                                            "class": "input", "type": "text", "placeholder": "Indiquez le titre de votre pétition",
+                                                            "class": "form-control", "type": "text", "placeholder": "Indiquez le titre de votre pétition",
                                                             oninput: function (e) { Api_CrudPetition.item.titre = e.target.value },
                                                             value: Api_CrudPetition.item.titre
                                                         })
-                                                    ),
-                                                    m("p", { "class": "help  is-primary is-light" },
-                                                        "Le titre est obligatoire"
                                                     )
                                                 ]
                                             ),
@@ -730,9 +720,9 @@
                                                     m("label", { "class": "label" },
                                                         "Thème"
                                                     ),
-                                                    m("div", { "class": "control" },
+                                                    m("div", { "class": "form-group" },
                                                         m("input", {
-                                                            "class": "input", "type": "text", "placeholder": "Donnez le thème general",
+                                                            "class": "form-control", "type": "text", "placeholder": "Donnez le thème general",
                                                             oninput: function (e) { Api_CrudPetition.item.theme = e.target.value },
                                                             value: Api_CrudPetition.item.theme
                                                         })
@@ -744,9 +734,9 @@
                                                     m("label", { "class": "label" },
                                                         "Tag"
                                                     ),
-                                                    m("div", { "class": "control" },
+                                                    m("div", { "class": "form-group" },
                                                         m("input", {
-                                                            "class": "input", "type": "text", "placeholder": "Indiquez vos tags, chaque tag doit etre terminer par un point virgule ;",
+                                                            "class": "form-control", "type": "text", "placeholder": "Indiquez vos tags, chaque tag doit etre terminer par un point virgule ;",
                                                             oninput: function (e) { Api_CrudPetition.item.tag_string = e.target.value },
                                                             value: Api_CrudPetition.item.tag_string
                                                         })
@@ -758,9 +748,9 @@
                                                     m("label", { "class": "label" },
                                                         "Image"
                                                     ),
-                                                    m("div", { "class": "control" },
+                                                    m("div", { "class": "form-group" },
                                                         m("input", {
-                                                            "class": "input", "type": "text", "placeholder": "Indiquez l'URL de votre image",
+                                                            "class": "form-control", "type": "text", "placeholder": "Indiquez l'URL de votre image",
                                                             oninput: function (e) { Api_CrudPetition.item.img_url = e.target.value },
                                                             value: Api_CrudPetition.item.img_url
                                                         })
@@ -772,9 +762,9 @@
                                                     m("label", { "class": "label" },
                                                         "Nombre de signatures visés"
                                                     ),
-                                                    m("div", { "class": "control" },
+                                                    m("div", { "class": "form-group" },
                                                         m("input", {
-                                                            "class": "input", "type": "number", "placeholder": "Indiquez le nombre de signatures que vous souhaitez atteindre",
+                                                            "class": "form-control", "type": "number", "placeholder": "Indiquez le nombre de signatures que vous souhaitez atteindre",
                                                             oninput: function (e) { Api_CrudPetition.item.objectifSignataire = e.target.value },
                                                             value: Api_CrudPetition.item.objectifSignataire
                                                         })
@@ -784,17 +774,17 @@
                                             m("div", { "class": "field" },
                                                 [
                                                     m("label", { "class": "label" },
-                                                        "Description"
+                                                        "Description*"
                                                     ),
-                                                    m("div", { "class": "control" },
+                                                    m("div", { "class": "form-group" },
                                                         m("textarea", {
-                                                            "class": "textarea ", "rows": "10", "placeholder": "Exprimez vous librement, et donnez tous les détails de votre pétition ",
+                                                            "class": "form-control ", "rows": "10", "placeholder": "Exprimez vous librement, et donnez tous les détails de votre pétition ",
                                                             oninput: function (e) { Api_CrudPetition.item.description = e.target.value },
                                                             value: Api_CrudPetition.item.description
                                                         })
                                                     ),
                                                     m("p", { "class": "help  is-primary is-light" },
-                                                        "La description est obligatoire"
+                                                        "* signifie que l'entrée est obligatoire"
                                                     )
                                                 ]
                                             ),
@@ -1094,7 +1084,7 @@
                     [
                         m("div", { "class": "card-content" },
                             [
-                                m("img", { "src": item.properties.img_url }),
+                                //m("img", { "src": item.properties.img_url }),
                                 m("p", { "class": "title" }, item.properties.titre),
                                 m("p", { "class": "subtitle truncate" }, item.properties.description),
                                 m("progress", { "class": "progress is-success", "value": pourcent, "max": "100" }),

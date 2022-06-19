@@ -40,8 +40,8 @@ td, th,.subtitle
 
 .is-active a
 {
-	border-bottom-color: #8b00d1!important;
-	color: #8b00d1!important;
+	border-bottom-color: #000ed1!important;
+	color: #000ed1!important;
 	font-weight: 500;
 }
 
@@ -68,7 +68,7 @@ margin-bottom: 30px}
 
 .link
 {
-	color: #8b00d1!important;
+	color: #000ed1!important;
 	font-weight: 500;
 }
 
@@ -93,12 +93,17 @@ margin-bottom: 30px}
 a.navbar-item.is-active,a.navbar-item:hover,a.navbar-item:active
 {
 	background: #fafafa!important;
-	color: #8b00d1!important;
+	color: #000ed1!important;
 }
 
 .pagination
 {
 	justify-content: center;
+}
+
+.pagination-next:hover
+{
+    color: #000ed1;
 }
 
 .tabs span
@@ -192,7 +197,7 @@ form header
 	position: fixed!important;
 	z-index: 30;
 	width: 640px;
-	background-color: #8b00d1!important;
+	background-color: #000ed1!important;
 	border-color: transparent;
 text-align:center!important}
 
@@ -283,8 +288,8 @@ color:black!important}
 
 .search li.is-active a
 {
-	background-color:  #8b00d1!important;
-	border-color:  #8b00d1!important;
+	background-color:  #000ed1!important;
+	border-color:  #000ed1!important;
 }
 
 .search li.is-active span
@@ -299,19 +304,19 @@ margin-bottom:10px
 
 .button.is-primary
 {
-	background-color: #8b00d1;
+	background-color: #000ed1;
 	border-color: transparent;
 	color: #fff;
 }
 
 .help.is-primary
 {
-	color: #8b00d1;
+	color: #000ed1;
 }
 
 .notification.is-primary
 {
-	background-color: #8b00d1;
+	background-color: #000ed1;
 	color: #fff;
 }
 
