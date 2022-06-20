@@ -337,7 +337,7 @@
 
                 return m.request({
                     method: "GET",
-                    url: hostApi + "/petition/signed/:userID/:last",
+                    url: hostApi + "/petition/list_signed/{userID}/{last}",
                     params: { userID: userConnecter.id, last: idItem }
                 })
                     .then(function (result) {
@@ -717,6 +717,7 @@
                                                     )
                                                 ]
                                             ),
+                                            
                                             m("div", { "class": "field " },
                                                 [
                                                     m("label", { "class": "label" },
@@ -730,7 +731,7 @@
                                                         })
                                                     )
                                                 ]
-                                            ),
+                                            ),/*
                                             m("div", { "class": "field " },
                                                 [
                                                     m("label", { "class": "label" },
@@ -744,7 +745,7 @@
                                                         })
                                                     )
                                                 ]
-                                            ),
+                                            ),*/
                                             m("div", { "class": "field " },
                                                 [
                                                     m("label", { "class": "label" },
@@ -812,7 +813,7 @@
         var Header = {
             view: function () {
 
-                return [m("nav", { "class": "navbar is-fixed-top box", "role": "navigation", "aria-label": "main navigation" },
+                return [m("nav", { "class": "navbar bg-light is-fixed-top box", "role": "navigation", "aria-label": "main navigation" },
                     [
                         m("div", { "class": "navbar-brand" },
                             [
@@ -837,15 +838,34 @@
                                         m(m.route.Link, {
                                             href: "/top100Signed", onclick: function (e) {currentURL = '/Top100Signed';
                                             }, class: currentURL == "/Top100Signed" ? "navbar-item fw-500 is-active" : "navbar-item fw-500" 
-                                        }, " Pétitions les plus signées "),
-                                    
-                                        m(m.route.Link, {
-                                            href: "/SearchPetition", onclick: function (e) {currentURL = '/SearchPetition';
-                                            }, class: currentURL == "/SearchPetition" || currentURL == "/SearchPetition" ? "navbar-item fw-500 is-active" : "navbar-item fw-500"
-                                        }, " Rechercher une petition "),      
+                                        }, " Pétitions les plus signées "),   
 
                                     ]
-                                ),                              
+                                ),
+                                m("p", { "class": "control txt-center" },
+                                [
+                                    m("input", {
+                                        "class": "input txt-center w-60 ", "type": "text", "placeholder": "Indiquez le titre ou l'un des tags de la petition recherchée",
+                                        oninput: function (e) { API_SearchPetition.key_search = e.target.value },
+                                        value: API_SearchPetition.key_search
+                                    }),
+                                    m("a", {
+                                        "class": "link dark",
+                                        href: "App.html#!/SearchPetition",
+                                        onclick: function (e) {
+
+                                            API_SearchPetition.loadList(0);
+
+
+                                        },
+                                        class: currentURL == "/SearchPetition" 
+                                    },
+                                        m("span", { "class": "icon mt-8" },
+                                            m("i", { "class": "fas fa-search", "aria-hidden": "true" })
+                                        )
+                                    )
+                                ]
+                            ),                              
 
                                 m("div", { "class": "navbar-end" },
 
@@ -962,7 +982,34 @@
             }
         }
 
-        var TabMyPetitionSigned = TabMyPetitionCreated;
+        var TabMyPetitionSigned = {
+        view: function () {
+                return [
+                    m("hr", { "class": "m-0 p-22" }),
+                    m("br"),
+                    m("h2", { "class": "title is-2 has-text-centered" },
+                        "Bienvenue, " + userConnecter.name
+                    ),
+                    m("div", { "class": "tabs is-centered m-0" },
+                        m("ul",
+                            [
+                                m("li", { class: currentURL == "/MyPetitionCreated" ? "is-active" : "" }, m(m.route.Link, {
+                                    href: "/MyPetitionCreated", onclick: function (e) {
+                                        currentURL = '/MyPetitionCreated';
+                                    }
+                                }, "Pétition(s) lancée(s)")),
+                                m("li", { class: currentURL == "/MyPetitionSigned" ? "is-active" : "" }, m(m.route.Link, {
+                                    href: "/MyPetitionSigned", onclick: function (e) {
+                                        currentURL = '/MyPetitionSigned';
+                                    }
+                                }, "Pétition(s) signée(s)"))
+
+                            ]
+                        )
+                    )
+                ]
+            }
+        }
         var TabSearchPetition = {
             view: function () {
                 return [
@@ -971,66 +1018,6 @@
                     m("h2", { "class": "title is-2 has-text-centered" },
                         "Rechercher des pétitions"
                     ),
-                    m("div", { "class": "panel-block search" },
-                        [
-                            m("p", { "class": "control txt-center" },
-                                [
-                                    m("input", {
-                                        "class": "input txt-center w-60 ", "type": "text", "placeholder": "Indiquez le titre ou l'un des tags de la petition recherchée",
-                                        oninput: function (e) { API_SearchPetition.key_search = e.target.value },
-                                        value: API_SearchPetition.key_search
-                                    }),
-                                    m("a", {
-                                        "class": "link dark",
-                                        onclick: function (e) {
-
-                                            API_SearchPetition.loadList(0);
-
-
-                                        }
-                                    },
-                                        m("span", { "class": "icon mt-8" },
-                                            m("i", { "class": "fas fa-search", "aria-hidden": "true" })
-                                        )
-                                    )
-                                ]
-                            ),
-                            m("div", { "class": "tabs is-toggle is-toggle-rounded" },
-                                m("ul",
-                                    [
-                                        m("li", { class: API_SearchPetition.type == "tag" ? "is-active" : "" },
-                                            m("a", {
-                                                onclick: function (e) {
-
-                                                    API_SearchPetition.type == "tag" ? "" : API_SearchPetition.changeType("tag");
-
-
-                                                }
-                                            },
-                                                m("span",
-                                                    "Tag"
-                                                )
-                                            )
-                                        ),
-                                        m("li", { class: API_SearchPetition.type == "titre" ? "is-active" : "" },
-                                            m("a", {
-                                                onclick: function (e) {
-
-                                                    API_SearchPetition.changeType("titre");
-
-
-                                                }
-                                            },
-                                                m("span",
-                                                    "Titre"
-                                                )
-                                            )
-                                        )
-                                    ]
-                                )
-                            )
-                        ]
-                    )
                 ]
             }
         }
