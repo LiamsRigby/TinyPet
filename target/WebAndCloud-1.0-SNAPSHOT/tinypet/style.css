@@ -3,14 +3,9 @@
 	display: flex;
 }
 
-.nav a
-{
-	margin: 0 40px 30px;
-}
-
 nav
 {
-    background: #d10000;
+    background-color: #e3f2fd;
 }
 
 .ml-24
@@ -99,8 +94,9 @@ td, th,.subtitle
 
 a.navbar-item.is-active,a.navbar-item:hover,a.navbar-item:active
 {
-	background: #fafafa!important;
+	background: #cacaca!important;
 	color: #000ed1!important;
+    border-radius: 10px;
 }
 
 .pagination
@@ -343,6 +339,6 @@ margin-bottom:10px
 .button.is-primary.is-hovered, .button.is-primary:hover {
     background-color: #8389e9;
     border-color: transparent;
-    color: #fff;
+    color: rgb(255, 0, 0);
 }
 
