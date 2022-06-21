@@ -1,4 +1,4 @@
-package foo;
+/*package foo;
 import java.io.IOException;
 import java.net.Inet4Address;
 
@@ -30,4 +30,4 @@ public class HelloAppEngine extends HttpServlet {
     response.getWriter().println("j:"+j++);
 
   }
-}
+}*/

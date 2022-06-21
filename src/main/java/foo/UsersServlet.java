@@ -19,7 +19,7 @@ package foo;
 
 //[START users_API_example]
 
-
+/*
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -58,4 +58,4 @@ public class UsersServlet extends HttpServlet {
    }
  }
 }
-//[END users_API_example]
+//[END users_API_example]*/

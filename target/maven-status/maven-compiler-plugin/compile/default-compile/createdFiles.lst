@@ -1,9 +1,7 @@
-foo/UsersServlet.class
 foo/PetitionInit.class
 foo/PetitionInitPlus.class
 foo/PetitionRemoveAll.class
 foo/PetitionEndpoint.class
-foo/HelloAppEngine.class
 foo/PetitionQuery.class
 foo/RandomDate.class
 foo/PetitionSigned.class
