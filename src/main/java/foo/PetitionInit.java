@@ -36,8 +36,8 @@ public class PetitionInit extends HttpServlet {
 			for (int j = 0; j < 10; j++) {
 				String userId= "user_" +j;
 				Entity e = new Entity("User", userId);
-				e.setProperty("nom", "Mon nom est " + j);
-				e.setProperty("prenom", "Mon prénom est " + j);
+				e.setProperty("nom", "Nom " + j);
+				e.setProperty("prenom", "prénom " + j);
 				e.setProperty("email", "Mon adresse mail est " + j);
 
 				datastore.put(e);
@@ -57,7 +57,7 @@ public class PetitionInit extends HttpServlet {
 					String petitionId=  date_formated + ":" + userId + ":" + k;
 					Entity p = new Entity("Petition", petitionId);
 					p.setProperty("theme", "Le thème est " + j);
-					p.setProperty("titre", "Le titre est " + j);
+					p.setProperty("titre", "titre P" + j);
 					p.setProperty("description", "La description est " + j);
 					p.setProperty("date", dateValue);
 					p.setProperty("update_at", dateValue);
