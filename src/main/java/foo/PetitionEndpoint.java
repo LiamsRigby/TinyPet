@@ -51,14 +51,8 @@ public class PetitionEndpoint {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Petition");
-		//q.addProjection(new PropertyProjection("nbSignataire", Integer.class));
-		
-		
-		
-		if (!last.equals("0")) {
-			
+		if (!last.equals("0")) {	
 			Key petitionKey = new Entity("Petition", last).getKey();
-			//Entity e = datastore.get(petitionKey);
 			q.setFilter(new FilterPredicate("__key__", FilterOperator.GREATER_THAN, petitionKey)); 
 					
 		}
@@ -74,10 +68,7 @@ public class PetitionEndpoint {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Petition");
-		//q.addProjection(new PropertyProjection("nbSignataire", Integer.class));
 		q.addSort("nbSignataire", SortDirection.DESCENDING);
-		
-		
 		if (!last.equals("0")) {
 			
 			Key petitionKey = new Entity("Petition", last).getKey();
@@ -92,6 +83,10 @@ public class PetitionEndpoint {
 		return petitions;
 	
 	}
+	
+	/*
+	* ajout d'un objectif de signature
+	*/
 	@ApiMethod(name = "addObjectifSignataire", path="petition/objectif-signataire/{petitionID}/{objectif}", httpMethod = ApiMethod.HttpMethod.GET)
 	public Entity addObjectifSignataire(@Named("petitionID") String petitionID, @Named("objectif") int objectif) throws EntityNotFoundException {
 
@@ -104,6 +99,9 @@ public class PetitionEndpoint {
 		
 		return e;
 	}
+	/*
+	* info de la pétiton sélectionné
+	*/
 	@ApiMethod(name = "infoPetition", path="petition/info/{petitionID}", httpMethod = ApiMethod.HttpMethod.GET)
 	public Entity infoPetition(@Named("petitionID") String petitionID) throws EntityNotFoundException {
 
@@ -112,6 +110,10 @@ public class PetitionEndpoint {
 		Entity e = datastore.get(petitionKey);
 		return e;
 	}
+	
+	/*
+	* Ajouter une pétition
+	*/
 	
 	@ApiMethod(name = "addPetition", path="petition/add", httpMethod = ApiMethod.HttpMethod.POST)
 	public Entity addPetition(PetitionItem pi) {
@@ -147,6 +149,9 @@ public class PetitionEndpoint {
 		datastore.put(e);
 		return e;
 	}
+	/*
+	* Mise à jour de la pétition
+	*/
 	@ApiMethod(name = "updatePetition", path="petition/update", httpMethod = ApiMethod.HttpMethod.POST)
 	public Entity updatePetition(PetitionItem pi) throws EntityNotFoundException {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -171,10 +176,6 @@ public class PetitionEndpoint {
 		}
 		
 		e.setProperty("tag", listTag);
-		//e.setProperty("tag", pi.tag);
-		
-		
-		//Transaction txn = datastore.beginTransaction();
 		datastore.put(e);
 		//txn.commit();
 		return e;
@@ -209,8 +210,10 @@ public class PetitionEndpoint {
 		
 	
 	}
-	
-    @ApiMethod(name = "addSignataire", path="signature/add/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
+	/*
+	* Ajouter une signature a la pétition sélectionner
+	*/
+    @ApiMethod(name = "addSignature", path="signature/add/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
 	public Entity addSignataire(@Named("petitionID") String petitionID, @Named("userID") int userID) throws EntityNotFoundException {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Signature");
@@ -268,8 +271,11 @@ public class PetitionEndpoint {
 		}
 		return response;
 	}
+	/*
+	* retirer la signature
+	*/
 
-	@ApiMethod(name = "deleteSignataire", path="signature/delete/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
+	@ApiMethod(name = "deleteSignature", path="signature/delete/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
 	public Entity deleteSignataire(@Named("petitionID") String petitionID, @Named("userID") int userID) throws EntityNotFoundException {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Signature");
@@ -428,16 +434,12 @@ public class PetitionEndpoint {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Petition");
-		//q.addProjection(new PropertyProjection("nbSignataire", Integer.class));
-		
-		
 		
 		if (last.equals("0")) {
 			q.setFilter(new FilterPredicate("tag", FilterOperator.EQUAL, tag));
 		} else {
 			
 			Key petitionKey = new Entity("Petition", last).getKey();
-			//Entity e = datastore.get(petitionKey);
 			q.setFilter(CompositeFilterOperator.and(
 					new FilterPredicate("tag", FilterOperator.EQUAL, tag),
 					new FilterPredicate("__key__", FilterOperator.GREATER_THAN, petitionKey) 
@@ -457,10 +459,6 @@ public class PetitionEndpoint {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Petition");
-		//q.addProjection(new PropertyProjection("nbSignataire", Integer.class));
-		
-		
-		
 		if (last.equals("0")) {
 			q.setFilter(new FilterPredicate("titre", FilterOperator.GREATER_THAN_OR_EQUAL, titre));
 		} else {
