@@ -5,9 +5,7 @@ Les objestifs du projet sont de réalisé ce site via l'application Google App E
 Ce projet a été fait par TOMEI Paul, RIGBY Liam et SERY Angèle.
 
 # Liens d'accès
-Lien d'accès vers l'API : https://petcloudproject.nw.r.appspot.com/
-
-Lien d'accès vers le site internet : https://petcloudproject.nw.r.appspot.com/pet_site/petApp.html#!/
+Lien d'accès vers le site Internet : https://petitions-352013.ew.r.appspot.com/
 
 # Fonctions réalisées
 - Ajouter une pétition
