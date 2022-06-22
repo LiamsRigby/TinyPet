@@ -69,25 +69,25 @@
         function getItemUpdatedInView(index) {
 
             switch (currentURL) {
-                case "/": return Top10NewPetitions.list[index];
+                case "/": return NewPetitionTop10.list[index];
                 case "/top100Signed": return Top10SignedPetitions.list[index];
                 case "/MyPetitionCreated": return API_MyPetitionCreated.list[index];
                 case "/MyPetitionSigned": return API_MyPetitionSigned.list[index];
             }
         }
-        function UpdatedCardPetitionInView(index) {
+        function MajCardPetitionInView(index) {
             var cardView = document.getElementsByClassName("card slider")[index];
 
-            cardView.getElementsByClassName("title")[0].innerHTML = Api_CrudPetition.item.titre;
-            cardView.getElementsByClassName("subtitle")[0].innerHTML = Api_CrudPetition.item.description;
-            var pourcent = Math.ceil(100 * Api_CrudPetition.item.nbSignataire / Api_CrudPetition.item.objectifSignataire);
-            if (Api_CrudPetition.item.objectifSignataire == 0) {
+            cardView.getElementsByClassName("title")[0].innerHTML = Api_CreationPetition.item.titre;
+            cardView.getElementsByClassName("subtitle")[0].innerHTML = Api_CreationPetition.item.description;
+            var pourcent = Math.ceil(100 * Api_CreationPetition.item.nbSignataire / Api_CreationPetition.item.objectifSignataire);
+            if (Api_CreationPetition.item.objectifSignataire == 0) {
                 pourcent = 100;
             }
-            cardView.getElementsByTagName("progress")[0].outerHTML = "<progress value=" + pourcent + " max=\"100\" class=\"progress is-success\"></progress>";
-            cardView.getElementsByTagName("strong")[0].innerHTML = Api_CrudPetition.item.nbSignataire + " personnes ont signé";
-            cardView.getElementsByTagName("span")[0].innerHTML = " d'un objectif de " + Api_CrudPetition.item.objectifSignataire + " signatures";
-            cardView.getElementsByTagName("img")[0].src = Api_CrudPetition.item.img_url;
+            cardView.getElementsByTagName("progress")[0].outerHTML = "<progress value=" + pourcent + " max=\"100\" class=\"progress is-link\"></progress>";
+            cardView.getElementsByTagName("strong")[0].innerHTML = Api_CreationPetition.item.nbSignataire + " personnes ont signé";
+            cardView.getElementsByTagName("span")[0].innerHTML = " d'un objectif de " + Api_CreationPetition.item.objectifSignataire + " signatures";
+            cardView.getElementsByTagName("img")[0].src = Api_CreationPetition.item.img_url;
         }
         function UpdatedNbSignatureInView() {
             var cardView = document.getElementsByClassName("card slider")[API_infoPetition.index];
@@ -96,7 +96,7 @@
             if (API_infoPetition.item.objectifSignataire == 0) {
                 pourcent = 100;
             }
-            cardView.getElementsByTagName("progress")[0].outerHTML = "<progress value=" + pourcent + " max=\"100\" class=\"progress is-success\"></progress>";
+            cardView.getElementsByTagName("progress")[0].outerHTML = "<progress value=" + pourcent + " max=\"100\" class=\"progress is-link\"></progress>";
 
             cardView.getElementsByTagName("strong")[0].innerHTML = API_infoPetition.item.nbSignataire + " personnes ont signé ";
 
@@ -131,12 +131,12 @@
         }
         function ShowCreateAndUpdatePetitionView(idItem = null, index = null) {
             if (idItem == null) {
-                Api_CrudPetition.item = getPetitionObject();
-                Api_CrudPetition.index = null;
+                Api_CreationPetition.item = getPetitionObject();
+                Api_CreationPetition.index = null;
             } else {
                 API_infoPetition.index = index;
                 API_infoPetition.loadPetition(idItem);
-                Api_CrudPetition.index = index;
+                Api_CreationPetition.index = index;
 
             }
 
@@ -146,7 +146,7 @@
         function HideCreateAndUpdatePetitionView() {
             document.getElementById("CreateAndUpdatePetitionView").classList.remove('is-active');
             document.getElementById("html").classList.remove('is-clipped');
-            Api_CrudPetition.item = getPetitionObject();
+            Api_CreationPetition.item = getPetitionObject();
         }
         function ShowDetailPetitionView() {
             document.getElementById("DetailPetitionView").classList.add('is-active');
@@ -190,7 +190,7 @@
                 img_url: null
             }
         }
-        var Top10NewPetitions = {
+        var NewPetitionTop10 = {
             list: [],
             previous: ["0"],
             next: ["0"],
@@ -202,20 +202,20 @@
                 })
                     .then(function (result) {
 
-                        Top10NewPetitions.list = result.items;
+                        NewPetitionTop10.list = result.items;
                         scrollToTop();
                         var last = result.items[result.items.length - 1].key.name;
-                        var previousNext = Top10NewPetitions.next[Top10NewPetitions.next.length - 1];
+                        var previousNext = NewPetitionTop10.next[NewPetitionTop10.next.length - 1];
                         if (previousNext == undefined) {
                             previousNext = 0;
                         }
                         if (last > previousNext) {
-                            Top10NewPetitions.previous.push(previousNext);
-                            Top10NewPetitions.next.push(last);
+                            NewPetitionTop10.previous.push(previousNext);
+                            NewPetitionTop10.next.push(last);
                         }
-                        if (last <= previousNext && Top10NewPetitions.previous.length > 2) {
-                            Top10NewPetitions.previous.pop();
-                            Top10NewPetitions.next.pop();
+                        if (last <= previousNext && NewPetitionTop10.previous.length > 2) {
+                            NewPetitionTop10.previous.pop();
+                            NewPetitionTop10.next.pop();
                         }
                     })
             }
@@ -250,8 +250,8 @@
                 })
                     .then(function (result) {
                         API_infoPetition.item = result.properties
-                        Api_CrudPetition.item = result.properties
-                        Api_CrudPetition.item.ID = result.key.name
+                        Api_CreationPetition.item = result.properties
+                        Api_CreationPetition.item.ID = result.key.name
                     })
             }
         }
@@ -415,7 +415,7 @@
             }
         }
 
-        var Api_CrudPetition = {
+        var Api_CreationPetition = {
             item: getPetitionObject(),
             index: null,
             previous: ["0"],
@@ -427,7 +427,7 @@
                 return m.request({
                     method: "POST",
                     url: hostApi + "/petition/add",
-                    body: Api_CrudPetition.item,
+                    body: Api_CreationPetition.item,
                 })
                     .then(function (result) {
                         startNotification("Petition crée avec succès !");
@@ -443,12 +443,12 @@
                 return m.request({
                     method: "POST",
                     url: hostApi + "/petition/update",
-                    body: Api_CrudPetition.item,
+                    body: Api_CreationPetition.item,
                 })
                     .then(function (result) {
-                        Api_CrudPetition.item = result.properties;
-                        Api_CrudPetition.item.ID = result.key.name;
-                        UpdatedCardPetitionInView(Api_CrudPetition.index);
+                        Api_CreationPetition.item = result.properties;
+                        Api_CreationPetition.item.ID = result.key.name;
+                        MajCardPetitionInView(Api_CreationPetition.index);
                         startNotification("Petition modifié avec succès !");
                     })
             },
@@ -465,18 +465,18 @@
 
         }
 
-        var indexTop10NewPetitionsView, indexTop10SignedPetitionsView,
+        var indexNewPetitionTop10View, indexTop10SignedPetitionsView,
             indexMyPetitionCreatedView, indexMyPetitionSignedView, indexSearchPetitionView;
-        var Top10NewPetitionsView = {
+        var NewPetitionTop10View = {
             oninit: function (vnode) {
-                indexTop10NewPetitionsView = 0;
+                indexNewPetitionTop10View = 0;
             },
             oncreate: function (vnode) {
                 currentURL = "/";
-                Top10NewPetitions.loadList(indexTop10NewPetitionsView);
+                NewPetitionTop10.loadList(indexNewPetitionTop10View);
             },
             view: function () {
-                return [Top10NewPetitions.list.map(function (item, index) {
+                return [NewPetitionTop10.list.map(function (item, index) {
                     return m(cardPetition, { item: item, index: index })
                 }), m(paginationTop10New)]
             }
@@ -596,7 +596,7 @@
                                                                         )
                                                                     ]
                                                                 ),
-                                                                m("progress", { "class": "progress is-info", "value": pourcent, "max": "100" }),
+                                                                m("progress", { "class": "progress is-link", "value": pourcent, "max": "100" }),
                                                                 m("footer", { "class": "card-footer" },
                                                                     m("p", { "class": "card-footer-item" },
                                                                         m("span", m("a", {
@@ -664,10 +664,10 @@
                             m("form", {
                                 "class": "form scroll-y", onsubmit: function (e) {
                                     e.preventDefault()
-                                    if (Api_CrudPetition.item.ID == null) {
-                                        Api_CrudPetition.createPetition();
+                                    if (Api_CreationPetition.item.ID == null) {
+                                        Api_CreationPetition.createPetition();
                                     } else {
-                                        Api_CrudPetition.updatePetition();
+                                        Api_CreationPetition.updatePetition();
                                     }
                                     HideCreateAndUpdatePetitionView();
 
@@ -697,8 +697,8 @@
                                                     m("div", { "class": "form-group" },
                                                         m("input", {
                                                             "class": "form-control", "type": "text", "placeholder": "Indiquez le titre de votre pétition",
-                                                            oninput: function (e) { Api_CrudPetition.item.titre = e.target.value },
-                                                            value: Api_CrudPetition.item.titre
+                                                            oninput: function (e) { Api_CreationPetition.item.titre = e.target.value },
+                                                            value: Api_CreationPetition.item.titre
                                                         })
                                                     )
                                                 ]
@@ -711,8 +711,8 @@
                                                     m("div", { "class": "form-group" },
                                                         m("input", {
                                                             "class": "form-control", "type": "text", "placeholder": "Donnez le thème general",
-                                                            oninput: function (e) { Api_CrudPetition.item.theme = e.target.value },
-                                                            value: Api_CrudPetition.item.theme
+                                                            oninput: function (e) { Api_CreationPetition.item.theme = e.target.value },
+                                                            value: Api_CreationPetition.item.theme
                                                         })
                                                     )
                                                 ]
@@ -726,8 +726,8 @@
                                                     m("div", { "class": "form-group" },
                                                         m("input", {
                                                             "class": "form-control", "type": "text", "placeholder": "Indiquez vos tags, chaque tag doit etre terminer par un point virgule ;",
-                                                            oninput: function (e) { Api_CrudPetition.item.tag_string = e.target.value },
-                                                            value: Api_CrudPetition.item.tag_string
+                                                            oninput: function (e) { Api_CreationPetition.item.tag_string = e.target.value },
+                                                            value: Api_CreationPetition.item.tag_string
                                                         })
                                                     )
                                                 ]
@@ -740,8 +740,8 @@
                                                     m("div", { "class": "form-group" },
                                                         m("input", {
                                                             "class": "form-control", "type": "number", "placeholder": "Indiquez le nombre de signatures que vous souhaitez atteindre",
-                                                            oninput: function (e) { Api_CrudPetition.item.objectifSignataire = e.target.value },
-                                                            value: Api_CrudPetition.item.objectifSignataire
+                                                            oninput: function (e) { Api_CreationPetition.item.objectifSignataire = e.target.value },
+                                                            value: Api_CreationPetition.item.objectifSignataire
                                                         })
                                                     )
                                                 ]
@@ -754,8 +754,8 @@
                                                     m("div", { "class": "form-group" },
                                                         m("textarea", {
                                                             "class": "form-control ", "rows": "10", "placeholder": "Exprimez vous librement, et donnez tous les détails de votre pétition ",
-                                                            oninput: function (e) { Api_CrudPetition.item.description = e.target.value },
-                                                            value: Api_CrudPetition.item.description
+                                                            oninput: function (e) { Api_CreationPetition.item.description = e.target.value },
+                                                            value: Api_CreationPetition.item.description
                                                         })
                                                     ),
                                                     m("p", { "class": "help  is-primary is-light" },
@@ -1067,7 +1067,7 @@
                                             "class": "link",
                                             onclick: function (e) {
                                                 item.deleted = true;
-                                                Api_CrudPetition.deletePetition(item.key.name);
+                                                Api_CreationPetition.deletePetition(item.key.name);
 
                                             }
                                         }, [
@@ -1110,23 +1110,23 @@
         }
         var paginationTop10New = {
             view: function () {
-                return Top10NewPetitions.list.length < 10 ? "" : m("nav", { "class": "pagination is-rounded", "role": "navigation", "aria-label": "pagination" },
+                return NewPetitionTop10.list.length < 10 ? "" : m("nav", { "class": "pagination is-rounded", "role": "navigation", "aria-label": "pagination" },
                     [
 
                         m(m.route.Link, {
                             "class": "pagination-previous", href: "/", onclick: function (e) {
-                                indexTop10NewPetitionsView = Top10NewPetitions.previous[Top10NewPetitions.previous.length - 2];
-                                if (indexTop10NewPetitionsView == undefined) {
-                                    indexTop10NewPetitionsView = 0;
+                                indexNewPetitionTop10View = NewPetitionTop10.previous[NewPetitionTop10.previous.length - 2];
+                                if (indexNewPetitionTop10View == undefined) {
+                                    indexNewPetitionTop10View = 0;
                                 }
-                                Top10NewPetitions.loadList(indexTop10NewPetitionsView)
+                                NewPetitionTop10.loadList(indexNewPetitionTop10View)
 
                             }
                         }, "Page précédente"),
                         m(m.route.Link, {
                             "class": "pagination-next", href: "/", onclick: function (e) {
-                                indexTop10NewPetitionsView = Top10NewPetitions.next[Top10NewPetitions.next.length - 1];
-                                Top10NewPetitions.loadList(indexTop10NewPetitionsView)
+                                indexNewPetitionTop10View = NewPetitionTop10.next[NewPetitionTop10.next.length - 1];
+                                NewPetitionTop10.loadList(indexNewPetitionTop10View)
                             }
                         }, "Page suivante")
                     ]
@@ -1216,7 +1216,7 @@
                 m("br"),    
                 m("br"),    
                 m('div', { class: 'p-30 cendre' }, [
-                    m(Top10NewPetitionsView)
+                    m(NewPetitionTop10View)
                 ])]
             }
         }
