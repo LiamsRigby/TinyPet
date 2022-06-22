@@ -35,12 +35,8 @@ Entité User
 
 
 # Problèmes rencontrés
-Connexion Google : Il arrive que nous n'arrivions pas à détecter l'ID lors de la connexion Google, il faut alors recharger la page
-
-Bouton Google : Parfois, lorsqu'on est déconnecté et qu'on souhaite se connecter, el bouton Google ne s'affiche pas, dans ce cas là, appuyer sur F5 devrait résoudre le problème
-
-Affichage top 100 pétitions : Nous avons rencontrés des difficultés à afficher 100 pétitions, nous nous sommes donc restreint à 10 pétitions pour le top 10.
+La réalisation de ce projet fut difficle car nous avons au début décidé d'utiliser React afin de faire la partie frontend mais nous n'arrivions à le lier avec le backend. Comme nous n'arrivions pas à solutionner le problème et par manque de temps, nous avons décidé d'utiliser finalement le framework mithril en nous inspirant du cours de Mr Pascal MOLLI (https://github.com/momo54/webandcloud) et un autre projet TinyPet déjà réalisé, en ajoutant nos propores idées.
 
 # Conclusion
-Ce projet nous a permis de mettre en pratique des notions vues en cours (scalabilité, utilisation d'API, etc...).
-L'organisation choisie et appliquée dans notre groupe pour ce projet a été de faire les grosses mises en commun / réunions lors des weekends, et d'avancer au maximum dans la documentation et le developpement lors des fin de journée, après nos stages.
+Ce projet nous a permis d'utiliser et de comprendre plus en profondeur les notions vues en cours et d'apprendre à utiliser le framework Mithril même si nous sommes très déçus de ne pas avoir réussi à faire le projet en utilisant React.
+
