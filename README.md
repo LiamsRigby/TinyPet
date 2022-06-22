@@ -20,20 +20,6 @@ Lien d'accès vers le site Internet : https://petitions-352013.ew.r.appspot.com/
 - Voir mes pétitions
 - Se déconnecter
 
-# Images du datastore
-Entité Petition
-
-![image](https://user-images.githubusercontent.com/77157131/170880012-924fbf57-bacb-4eed-b085-924049c37d08.png)
-
-Entité Signature
-
-![image](https://user-images.githubusercontent.com/77157131/170880027-3b78f7ed-84ec-4634-ac87-b1352932b90b.png)
-
-Entité User
-
-![image](https://user-images.githubusercontent.com/77157131/170880043-85b63ff2-6060-4f60-bb97-224901786d09.png)
-
-
 # Problèmes rencontrés
 La réalisation de ce projet fut difficle car nous avons au début décidé d'utiliser React afin de faire la partie frontend mais nous n'arrivions à le lier avec le backend. Comme nous n'arrivions pas à solutionner le problème et par manque de temps, nous avons décidé d'utiliser finalement le framework mithril en nous inspirant du cours de Mr Pascal MOLLI (https://github.com/momo54/webandcloud) et un autre projet TinyPet déjà réalisé, en ajoutant nos propores idées.
 
