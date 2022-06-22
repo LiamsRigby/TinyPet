@@ -213,7 +213,7 @@ public class PetitionEndpoint {
 	/*
 	* Ajouter une signature a la pétition sélectionner
 	*/
-    @ApiMethod(name = "addSignature", path="signature/add/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
+    @ApiMethod(name = "addSignataire", path="signature/add/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
 	public Entity addSignataire(@Named("petitionID") String petitionID, @Named("userID") int userID) throws EntityNotFoundException {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Signature");
@@ -249,7 +249,7 @@ public class PetitionEndpoint {
 		return response;
 	}
 	
-	@ApiMethod(name = "verifieSignature", path="signature/verifie/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
+	@ApiMethod(name = "verifieSignataire", path="signature/verifie/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
 	public Entity verifieSignature(@Named("petitionID") String petitionID, @Named("userID") int userID) throws EntityNotFoundException {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Signature");
@@ -275,7 +275,7 @@ public class PetitionEndpoint {
 	* retirer la signature
 	*/
 
-	@ApiMethod(name = "deleteSignature", path="signature/delete/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
+	@ApiMethod(name = "deleteSignataire", path="signature/delete/{petitionID}/{userID}", httpMethod = ApiMethod.HttpMethod.GET)
 	public Entity deleteSignataire(@Named("petitionID") String petitionID, @Named("userID") int userID) throws EntityNotFoundException {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("Signature");
