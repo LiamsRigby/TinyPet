@@ -731,21 +731,7 @@
                                                         })
                                                     )
                                                 ]
-                                            ),/*
-                                            m("div", { "class": "field " },
-                                                [
-                                                    m("label", { "class": "label" },
-                                                        "Image"
-                                                    ),
-                                                    m("div", { "class": "form-group" },
-                                                        m("input", {
-                                                            "class": "form-control", "type": "text", "placeholder": "Indiquez l'URL de votre image",
-                                                            oninput: function (e) { Api_CrudPetition.item.img_url = e.target.value },
-                                                            value: Api_CrudPetition.item.img_url
-                                                        })
-                                                    )
-                                                ]
-                                            ),*/
+                                            ),
                                             m("div", { "class": "field " },
                                                 [
                                                     m("label", { "class": "label" },
@@ -1055,14 +1041,16 @@
                     pourcent = 100;
                 }
 
-                return m("div", { class: item.deleted != null ? "card slider closed" : "card slider" },
+                return m("div", { class: item.deleted != null ? "card slider closed " : "card slider border-dark" },
                     [
-                        m("div", { "class": "card-content" },
+                        m("div", { "class": "card-header border-dark" },
+                            m("p", { "class": "title" }, item.properties.titre),
+                        ),
+                        m("div", { "class": "card-content border-dark" },
                             [
-                                //m("img", { "src": item.properties.img_url }),
-                                m("p", { "class": "title" }, item.properties.titre),
+                                
                                 m("p", { "class": "subtitle truncate" }, item.properties.description),
-                                m("progress", { "class": "progress is-success", "value": pourcent, "max": "100" }),
+                                m("progress", { "class": "progress is-link", "value": pourcent, "max": "100" }),
                                 m("p", { "class": "has-text-centered" },
                                     [
                                         m("strong", item.properties.nbSignataire + " personnes ont signé "),
@@ -1071,7 +1059,7 @@
                                 )
                             ]
                         ),
-                        m("footer", { "class": "card-footer" },
+                        m("footer", { "class": "card-footer border-dark" },
                             item.properties.proprietaire == userConnecter.id ? [
                                 m("p", { "class": "card-footer-item" },
                                     m("span",
