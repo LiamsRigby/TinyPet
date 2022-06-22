@@ -1,10 +1,8 @@
 # CloudPetProject
-Dans le cadre du module "Développement d'applications sur le CLOUD", il nous a été demandé de réaliser un site internet de pétitions (en prenant comme exemple des sites comme https://www.change.org/, https://www.mesopinions.com/petition/ ou encore https://www.unepetition.fr/).
-L'objectif ici est d'avoir un site internet qui passe à l'échelle, c'est à dire un site internet capable de supporter une forte affluence (des millions de personnes qui réalisent la même action au même moment par exemple).
+Dans le cadre du module "Développement d'applications sur le CLOUD", nous avons réalisé un site internet de pétitions. 
+Les objestifs du projet sont de réalisé ce site via l'application Google App Engine, avec l'utilisation de framework comme Mithril ou Angular, l'appel d'API REST pour les Endpoints l'utilisation du Datastore de Google Platform.
 
-Ce fichier README va vous présenter les fonctions réalisées dans le cadre de ce projet, ainsi que les liens pour accéder à l'application web.
-
-Projet réalisé par ANDRE Louis, LE NY Yoann, DAVID Alexis.
+Ce projet a été fait par TOMEI Paul, RIGBY Liam et SERY Angèle.
 
 # Liens d'accès
 Lien d'accès vers l'API : https://petcloudproject.nw.r.appspot.com/
