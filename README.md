@@ -1,6 +1,6 @@
 # CloudPetProject
 Dans le cadre du module "Développement d'applications sur le CLOUD", nous avons réalisé un site internet de pétitions. 
-Les objestifs du projet sont de réalisé ce site via l'application Google App Engine, avec l'utilisation de framework comme Mithril ou Angular, l'appel d'API REST pour les Endpoints l'utilisation du Datastore de Google Platform.
+Les objestifs du projet sont de réaliser ce site via l'application Google App Engine, avec l'utilisation de framework comme Mithril ou Angular, l'appel d'API REST pour les Endpoints et l'utilisation du Datastore de Google Platform.
 
 Ce projet a été fait par TOMEI Paul, RIGBY Liam et SERY Angèle.
 
